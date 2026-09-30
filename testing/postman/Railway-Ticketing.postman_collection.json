@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "railgo-demo-001",
+    "name": "Railway Ticketing System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "trainId",
+      "value": "1"
+    },
+    {
+      "key": "seatId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"anand@example.com\", \"password\": \"password123\", \"fullName\": \"Anand Kumar\", \"phone\": \"9876543210\"}"
+        },
+        "url": "{{baseUrl}}/auth/register"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"sonu@example.com\", \"password\": \"Sonu@123\"}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      }
+    },
+    {
+      "name": "Get All Trains",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/trains"
+      }
+    },
+    {
+      "name": "Search Trains",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/trains/search?source=New%20Delhi&destination=Mumbai%20Central&date=2026-10-01"
+      }
+    },
+    {
+      "name": "Seat Availability",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/trains/{{trainId}}/seats?travelDate=2026-10-01"
+      }
+    },
+    {
+      "name": "Book Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"trainId\": 1, \"seatId\": 1, \"passengerName\": \"Anand Kumar\", \"passengerAge\": 24, \"travelDate\": \"2026-10-01\"}"
+        },
+        "url": "{{baseUrl}}/bookings"
+      }
+    },
+    {
+      "name": "My Bookings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/bookings/my"
+      }
+    },
+    {
+      "name": "Railway Status",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/status/12001"
+      }
+    },
+    {
+      "name": "Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/profile"
+      }
+    }
+  ]
+}
